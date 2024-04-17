@@ -16,33 +16,43 @@ const createAdmin = async (req, res) => {
 };
 
 const loginAdmin = async (req, res) => {
-  const { f_userName, f_Pwd } = req.body;
+  try {
+    const { f_userName, f_Pwd } = req.body;
 
-  const admin = await Admin.findOne({ f_userName });
+    const admin = await Admin.findOne({ f_userName });
 
-  if (!admin)
-    return res
-      .status(401)
-      .json({ success: false, message: "Invalid username or password" });
-  if (admin.f_Pwd !== f_Pwd)
-    return res.status(401).send("Invalid username or password");
+    if (!admin)
+      return res
+        .status(401)
+        .json({ success: false, message: "Invalid username or password" });
+    if (admin.f_Pwd !== f_Pwd)
+      return res.status(401).send("Invalid username or password");
 
-  let token = jwt.sign(
-    { user: admin._id },
-    process.env.JWT_SECRET_OR_PRIVATE_KEY
-  );
+    let token = jwt.sign(
+      { user: admin._id },
+      process.env.JWT_SECRET_OR_PRIVATE_KEY
+    );
 
-  return res.cookie("accesToken", token, { httpOnly: true }).json({
-    success: true,
-    accessToken: token,
-    currentUser: admin.f_userName,
-  });
+    return res.cookie("accesToken", token, { httpOnly: true }).json({
+      success: true,
+      accessToken: token,
+      currentUser: admin.f_userName,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
 };
 
 const verify = async (req, res) => {
-  res.json({
-    success: true,
-  });
+  try {
+    res.json({
+      success: true,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
 };
 
 module.exports = { verify, loginAdmin, createAdmin }; // ... other admin functions

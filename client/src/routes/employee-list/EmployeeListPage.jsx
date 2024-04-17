@@ -27,7 +27,7 @@ function getFormattedDate(date = new Date()) {
 }
 
 const EmployeeListPage = () => {
-  const { employeeList } = useContext(EmployeeContext);
+  const { employeeList, fetchEmployees } = useContext(EmployeeContext);
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const [searchKeyword, setSearchKeyword] = useState("");
@@ -38,6 +38,10 @@ const EmployeeListPage = () => {
       navigate("/login");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    fetchEmployees();
   }, []);
 
   const filteredItems = employeeList.filter((employee) =>

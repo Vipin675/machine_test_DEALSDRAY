@@ -31,21 +31,31 @@ const createEmployee = async (req, res) => {
 
 // Get All Employees
 const getEmployees = async (req, res) => {
-  const employees = await Employee.find();
-  res.json({ success: true, employees });
+  try {
+    const employees = await Employee.find();
+    res.json({ success: true, employees });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
 };
 
 // Get Single Employee by ID
 const getEmployeeById = async (req, res) => {
-  const { id } = req.params;
+  try {
+    const { id } = req.params;
 
-  const employee = await Employee.findById(id);
-  if (!employee)
-    return res
-      .status(404)
-      .json({ success: false, message: "Employee not found" });
+    const employee = await Employee.findById(id);
+    if (!employee)
+      return res
+        .status(404)
+        .json({ success: false, message: "Employee not found" });
 
-  res.json({ success: true, employee });
+    res.json({ success: true, employee });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
 };
 
 // Update Employee by ID
@@ -69,15 +79,20 @@ const updateEmployee = async (req, res) => {
 
 // Delete Employee by ID
 const deleteEmployee = async (req, res) => {
-  const { id } = req.params;
+  try {
+    const { id } = req.params;
 
-  const employee = await Employee.findByIdAndDelete(id);
-  if (!employee)
-    return res
-      .status(404)
-      .json({ success: false, message: "Employee not found" });
+    const employee = await Employee.findByIdAndDelete(id);
+    if (!employee)
+      return res
+        .status(404)
+        .json({ success: false, message: "Employee not found" });
 
-  res.send({ success: true, message: "Employee deleted successfully!" });
+    res.send({ success: true, message: "Employee deleted successfully!" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
 };
 
 module.exports = {

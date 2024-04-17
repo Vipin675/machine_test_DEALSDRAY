@@ -9,7 +9,7 @@ const HomePage = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  return <div>Welcom {localStorage.getItem("currentUser")}</div>;
+  return <div>Welcome Admin Panel</div>;
 };
 
 export default HomePage;

@@ -9,25 +9,31 @@ const EmployeeContext = createContext({
 });
 
 const EmployeeProvider = ({ children }) => {
-  const [currentEmployee, setCurrentEmployee] = useState({});
+  const [currentEmployee, setCurrentEmployee] = useState({
+    f_Name: "",
+    f_Email: "",
+    f_Mobile: "",
+    f_Designation: "",
+    f_gender: "",
+    f_Course: [],
+  });
   const [employeeList, setEmployeeList] = useState([]);
 
   // Fetch employee data on initial load (replace with your actual API endpoint)
-  useEffect(() => {
+  const fetchEmployees = async () => {
     const accessToken = localStorage.getItem("accessToken");
-    const fetchEmployees = async () => {
-      try {
-        const response = await fetch("http://localhost:5000/api/employees", {
-          method: "GET",
-          headers: { Authorization: `Bearer ${accessToken}` },
-        }); // Replace with your backend URL
-        const data = await response.json();
-        setEmployeeList(data.employees);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
+    try {
+      const response = await fetch("http://localhost:5000/api/employees", {
+        method: "GET",
+        headers: { Authorization: `Bearer ${accessToken}` },
+      }); // Replace with your backend URL
+      const data = await response.json();
+      setEmployeeList(data.employees);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  useEffect(() => {
     fetchEmployees();
   }, []);
 
@@ -121,8 +127,10 @@ const EmployeeProvider = ({ children }) => {
     setEmployeeList,
     updateEmployee,
     currentEmployee,
+    setCurrentEmployee,
     getEmployeeDetail,
     addEmployee,
+    fetchEmployees,
   };
 
   return (

@@ -44,6 +44,7 @@ const CreateEmployeePage = () => {
             name="f_Name"
             value={formData.f_Name}
             onChange={handleChange}
+            required
           />
         </label>
         <br />
@@ -54,6 +55,7 @@ const CreateEmployeePage = () => {
             name="f_Email"
             value={formData.f_Email}
             onChange={handleChange}
+            required
           />
         </label>
         <br />
@@ -64,6 +66,7 @@ const CreateEmployeePage = () => {
             name="f_Mobile"
             value={formData.f_Mobile}
             onChange={handleChange}
+            required
           />
         </label>
         <br />
@@ -73,6 +76,7 @@ const CreateEmployeePage = () => {
             name="f_Designation"
             value={formData.f_Designation}
             onChange={handleChange}
+            required
           >
             <option value="HR">HR</option>
             <option value="Manager">Manager</option>
@@ -88,6 +92,7 @@ const CreateEmployeePage = () => {
             value="Male"
             checked={formData.f_gender === "Male"}
             onChange={handleChange}
+            required
           />{" "}
           Male
           <input
@@ -96,6 +101,7 @@ const CreateEmployeePage = () => {
             value="Female"
             checked={formData.f_gender === "Female"}
             onChange={handleChange}
+            required
           />{" "}
           Female
         </label>
