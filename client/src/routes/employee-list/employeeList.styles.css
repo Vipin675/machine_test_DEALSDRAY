@@ -1,0 +1,74 @@
+/* EmployeeTable.css */
+
+.table-container {
+  width: 100vw;
+  overflow-x: auto;
+}
+
+.employee-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.employee-table th,
+.employee-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+.employee-table th {
+  background-color: #bdd7ee;
+  border: none;
+  font-weight: normal;
+}
+
+.pagination {
+  display: flex;
+  list-style: none;
+  padding: 0;
+}
+
+.pagination li {
+  margin-right: 5px;
+  cursor: pointer;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.pagination li:hover {
+  background-color: #f0f0f0;
+}
+
+.list-detail-container {
+  width: 100vw;
+  display: flex;
+  justify-content: end;
+}
+
+.list-detail-container a {
+  width: 300px;
+  background-color: #a9d08e;
+  color: black;
+  text-decoration: none;
+  margin-right: 50px;
+  margin-left: 50px;
+  padding: 5px;
+}
+
+.list-search-container {
+  padding: 2px;
+  background-color: #bdd7ee;
+  width: 100vw;
+  display: flex;
+  justify-content: end;
+}
+
+.list-search-container input {
+  width: 300px;
+  margin-left: 50px;
+  margin-right: 50px;
+  padding: 4px;
+}

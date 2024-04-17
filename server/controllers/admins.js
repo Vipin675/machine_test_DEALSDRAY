@@ -20,7 +20,10 @@ const loginAdmin = async (req, res) => {
 
   const admin = await Admin.findOne({ f_userName });
 
-  if (!admin) return res.status(401).send("Invalid username or password");
+  if (!admin)
+    return res
+      .status(401)
+      .json({ success: false, message: "Invalid username or password" });
   if (admin.f_Pwd !== f_Pwd)
     return res.status(401).send("Invalid username or password");
 
@@ -29,12 +32,17 @@ const loginAdmin = async (req, res) => {
     process.env.JWT_SECRET_OR_PRIVATE_KEY
   );
 
-  return res.cookie("access_token", token, { httpOnly: true }).json({
+  return res.cookie("accesToken", token, { httpOnly: true }).json({
     success: true,
-    message: `Welcome ${admin.f_userName}`,
+    accessToken: token,
+    currentUser: admin.f_userName,
   });
 };
 
-// ... Add other admin-related functions (Update, Delete)
+const verify = async (req, res) => {
+  res.json({
+    success: true,
+  });
+};
 
-module.exports = { loginAdmin, createAdmin }; // ... other admin functions
+module.exports = { verify, loginAdmin, createAdmin }; // ... other admin functions

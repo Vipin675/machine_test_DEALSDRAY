@@ -1,0 +1,64 @@
+/* Base styles */
+.nav-p-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nav-header {
+  font-size: x-large;
+}
+
+.nav-container {
+  background-color: #ddebf7;
+  width: 100%;
+}
+
+.nav-container ul {
+  margin: 8px;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+}
+
+.nav-container ul li {
+  font-size: large;
+}
+
+.nav-container ul li a {
+  text-decoration: none;
+}
+
+.logout {
+  cursor: pointer;
+  color: red;
+}
+
+.current_path {
+  width: 100%;
+  background-color: yellow;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  .nav-container ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-container ul li {
+    margin: 10px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-header {
+    font-size: large;
+  }
+
+  .nav-container ul li {
+    font-size: medium;
+  }
+}
