@@ -122,6 +122,29 @@ const EmployeeProvider = ({ children }) => {
     }
   };
 
+  const handleEmployeeDelete = async (employeeId) => {
+    const accessToken = localStorage.getItem("accessToken");
+    try {
+      const response = await fetch(
+        `http://localhost:5000/api/employees/${employeeId}`,
+        {
+          method: "DELETE",
+          headers: { Authorization: `Bearer ${accessToken}` },
+        }
+      ); // Replace with your backend URL
+      const data = await response.json();
+      fetchEmployees();
+
+      if (data.success) {
+        alert("Employee deleted!");
+      } else {
+        alert("Failed delete employee");
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   const value = {
     employeeList,
     setEmployeeList,
@@ -131,6 +154,7 @@ const EmployeeProvider = ({ children }) => {
     getEmployeeDetail,
     addEmployee,
     fetchEmployees,
+    handleEmployeeDelete,
   };
 
   return (

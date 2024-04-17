@@ -27,7 +27,8 @@ function getFormattedDate(date = new Date()) {
 }
 
 const EmployeeListPage = () => {
-  const { employeeList, fetchEmployees } = useContext(EmployeeContext);
+  const { employeeList, fetchEmployees, handleEmployeeDelete } =
+    useContext(EmployeeContext);
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const [searchKeyword, setSearchKeyword] = useState("");
@@ -44,7 +45,7 @@ const EmployeeListPage = () => {
     fetchEmployees();
   }, []);
 
-  const filteredItems = employeeList.filter((employee) =>
+  const filteredItems = employeeList?.filter((employee) =>
     employee.f_Name.toLowerCase().includes(searchKeyword.toLowerCase())
   );
 
@@ -66,7 +67,10 @@ const EmployeeListPage = () => {
           type="text"
           placeholder="Enter Search Keyword"
           value={searchKeyword}
-          onChange={(e) => setSearchKeyword(e.target.value)}
+          onChange={(e) => {
+            setSearchKeyword(e.target.value);
+            setCurrentPage(1);
+          }}
         />
       </div>
       <div className="table-container">
@@ -97,7 +101,15 @@ const EmployeeListPage = () => {
                 <td>{getFormattedDate(new Date(employee.f_Createdate))}</td>
                 <td>
                   <Link to={`${employee._id}`}>Edit</Link>
-                  <span>- delete</span>
+                  <span
+                    className="emp_delete_button"
+                    onClick={() => {
+                      handleEmployeeDelete(employee._id);
+                      setCurrentPage(1);
+                    }}
+                  >
+                    - delete
+                  </span>
                 </td>
               </tr>
             ))}

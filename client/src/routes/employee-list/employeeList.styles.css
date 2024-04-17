@@ -72,3 +72,8 @@
   margin-right: 50px;
   padding: 4px;
 }
+
+.emp_delete_button {
+  color: red;
+  cursor: pointer;
+}
